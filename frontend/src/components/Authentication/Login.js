@@ -37,7 +37,7 @@ const Login = () => {
       };
 
       const { data } = await axios.post(
-        "/api/user/login",
+        "http://localhost:5000/api/user/login",
         { email, password },
         config
       );
@@ -54,9 +54,10 @@ const Login = () => {
       setLoading(false);
       history("/chats");
     } catch (error) {
+      // console.log(error.message);
       toast({
         title: "Error Occured!",
-        description: error.response.data.message,
+        description: error.message,
         status: "error",
         duration: 5000,
         isClosable: true,

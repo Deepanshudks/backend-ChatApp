@@ -8,9 +8,11 @@ const connectDb = require("./config/db");
 const PORT = process.env.PORT || 5000
 const path = require("path")
 const { notFound, errorHandler } = require("./middlware/errorMiddleware")
+const cors = require("cors")
 
 dotenv.config();
 app.use(express.json())
+app.use(cors())
 connectDb()
 
 
@@ -18,8 +20,6 @@ connectDb()
 app.use("/api/user", userRoutes)
 app.use('/api/chat', chatRoutes)
 app.use('/api/message', messageRoutes)
-app.use(notFound)
-app.use(errorHandler)
 
 const __dirname1 = path.resolve()
 if(process.env.NODE_ENV === "production"){
@@ -32,6 +32,9 @@ if(process.env.NODE_ENV === "production"){
         res.send("Homepage")
     })
 }
+
+app.use(notFound)
+app.use(errorHandler)
 
 app.get("/", (req, res) => {
     res.send("Homepage")

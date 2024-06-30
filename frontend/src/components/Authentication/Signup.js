@@ -47,7 +47,7 @@ const Signup = () => {
         },
       };
       const { data } = await axios.post(
-        "/api/user",
+        "http://localhost:5000/api/user",
         {
           name,
           email,
@@ -68,6 +68,7 @@ const Signup = () => {
       setPicLoading(false);
       history("/chats");
     } catch (error) {
+      console.log(error.response);
       toast({
         title: "Error Occured!",
         description: error.response.data.message,
