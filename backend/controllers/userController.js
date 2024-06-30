@@ -3,7 +3,7 @@ const User  = require("../models/user");
 const generateToken = require("../config/generateToken");
 
 const registerUser = asyncHandler(async (req,res)=>{
-    const {name,email,password,picture} = req.body;
+    const {name,email,password,pic} = req.body;
 
     if(!name || !password || !email){
         res.status(400);
@@ -19,14 +19,14 @@ const registerUser = asyncHandler(async (req,res)=>{
         name,
         email,
         password,
-        picture
+        pic
     })
     if(user){
         res.status(201).json({
             _id :user._id,
             name: user.name,
             email: user.email,
-            picture:user.picture,
+            pic:user.pic,
             token : generateToken(user._id)
         })
     }else{
@@ -37,13 +37,14 @@ const registerUser = asyncHandler(async (req,res)=>{
 
 const authUser = asyncHandler(async(req,res)=>{
     const {email,password} = req.body;
+    console.log(req.body);
     const user  = await User.findOne({email})
     if(user && (await user.matchPassword(password))){
         res.json({
             id :user._id,
             name: user.name,
             email: user.email,
-            picture:user.picture,
+            pic:user.pic,
             token : generateToken(user._id)
         })
     }else{

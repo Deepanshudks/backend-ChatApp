@@ -15,7 +15,7 @@ const ChatPage = () => {
       <Box 
         display="flex" 
         justifyContent="space-between" 
-        bg={"#343a40"} 
+        bg={"black"} 
         w="100%" 
         h="91.5vh" 
         p="10px">
