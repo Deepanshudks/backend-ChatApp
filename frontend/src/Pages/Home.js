@@ -16,7 +16,7 @@ const Home = () => {
         borderWidth="1px"
         w="100%"
       >
-        <Text fontSize="4xl" fontFamily="Work sans" color="white">ChatHike</Text>
+        <Text fontSize="4xl" fontFamily="Work sans" color="white">Let's Connect</Text>
       </Box>
       <Box bg="#343a40" w="100%" p={4} borderRadius="lg" borderWidth="1px">
         <Tabs isFitted variant="soft-rounded">
