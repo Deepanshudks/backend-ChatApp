@@ -6,22 +6,32 @@ const messageRoutes = require("./routes/messageRoutes")
 const dotenv = require("dotenv");
 const connectDb = require("./config/db");
 const PORT = process.env.PORT || 5000
+const path = require("path")
 const { notFound, errorHandler } = require("./middlware/errorMiddleware")
 
 dotenv.config();
 app.use(express.json())
 connectDb()
 
-app.get("/", (req, res) => {
-    res.send("Homepage")
-    console.log("Homepage")
-})
+
 
 app.use("/api/user", userRoutes)
 app.use('/api/chat', chatRoutes)
 app.use('/api/message', messageRoutes)
 app.use(notFound)
 app.use(errorHandler)
+
+const __dirname1 = path.resolve()
+if(process.env.NODE_ENV === "production"){
+    app.use(express.static(path.join(__dirname1,"/frontend/build")))
+    app.get("*",(req,res)=>{
+        res.sendFile(path.resolve(__dirname1,"frontend","build","index.html"))
+    })
+}else{
+    app.get("/", (req, res) => {
+        res.send("Homepage")
+    })
+}
 
 app.get("/", (req, res) => {
     res.send("Homepage")
